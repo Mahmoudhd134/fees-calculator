@@ -1,0 +1,6 @@
+@FeesCalcer_HostAddress = http://localhost:5201
+
+GET {{FeesCalcer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

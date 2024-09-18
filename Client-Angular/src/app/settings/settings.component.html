@@ -1,0 +1,23 @@
+<div class="ion-page">
+  <app-app-ionic-header title="Settings" hasMenuButton/>
+
+  <ion-content>
+    <div class='container p-4 mx-auto'>
+      <ion-list-header>Appearance</ion-list-header>
+      <ion-list [inset]="true">
+        <ion-item>
+          <ion-select
+            label="Lighting Mode"
+            labelPlacement="floating"
+            [value]="currentMode"
+            (ionChange)="toggleChange($event)"
+          >
+            <ion-select-option [value]="LightMode.Light">Light</ion-select-option>
+            <ion-select-option [value]="LightMode.Dark">Dark</ion-select-option>
+            <ion-select-option [value]="LightMode.System">System</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</div>

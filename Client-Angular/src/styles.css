@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.active-link {
+  background-color: #e0e0e0; /* Light gray background for active item */
+  color: #007bff; /* Blue color for active item text, adjust as needed */
+}
+ion-item {
+  --transition: none;
+}
+
+

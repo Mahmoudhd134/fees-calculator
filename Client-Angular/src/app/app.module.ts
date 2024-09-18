@@ -10,9 +10,16 @@ import {AppHomeComponent} from "./app-home/app-home.component";
 import {AppIonicHeaderComponent} from "./app-ionic-header/app-ionic-header.component";
 import {SettingsComponent} from "./settings/settings.component";
 import {FormsModule} from "@angular/forms";
+import {PlacesComponent} from "./places/places.component";
 
 @NgModule({
-  declarations: [AppComponent, AppHomeComponent, AppIonicHeaderComponent, SettingsComponent],
+  declarations: [
+    AppComponent,
+    AppHomeComponent,
+    AppIonicHeaderComponent,
+    SettingsComponent,
+    PlacesComponent
+  ],
   imports: [
     BrowserModule,
     RouterModule,

@@ -1,0 +1,19 @@
+<div class="ion-page">
+  <app-app-ionic-header title="Places" hasBackButton/>
+  <ion-content>
+    <div class="container ion-padding mx-auto">
+
+      <ion-list>
+        <ion-item *ngFor="let place of places">
+          <ion-label>{{ place.name }}</ion-label>
+          <ion-buttons>
+            <ion-button color="primary" (click)="handleEdit(place)">Edit</ion-button>
+            <ion-button color="danger" (click)="handleDelete(place)">Delete</ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" (click)="handleAdd()" class="mt-5">Add</ion-button>
+    </div>
+  </ion-content>
+</div>
+

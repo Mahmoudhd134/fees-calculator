@@ -8,7 +8,8 @@ import {Component, Input, OnInit} from '@angular/core';
 export class AppIonicHeaderComponent implements OnInit {
 
   @Input({required: true}) title!: string
-  @Input() slot: string = 'start'
+  @Input() titleSlot: string = 'start'
+  @Input() buttonsSlot: string = 'start'
   @Input({transform: (value: string) => value === '' || 'true'}) hasBackButton: boolean = false
   @Input({transform: (value: string) => value === '' || 'true'}) hasMenuButton: boolean = false
 

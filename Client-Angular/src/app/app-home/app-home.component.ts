@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {DataServices} from "../../services/data-services";
+import {DataStoreServices} from "../../services/data-store-services.service";
 
 @Component({
   selector: 'app-app-home',

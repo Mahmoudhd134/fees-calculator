@@ -5,7 +5,7 @@ import {ItemModel} from "../models/item.models";
 import {PlaceModel} from "../models/place.models";
 
 @Injectable({providedIn: 'root'})
-export class DataServices {
+export class DataStoreServices {
   CATEGORIES_KEY = 'categories'
   ITEMS_KEY = 'items'
   PLACES_KEY = 'places'
@@ -20,15 +20,18 @@ export class DataServices {
 
   constructor() {
     this.categoriesSubject.subscribe(data => {
-      localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(data))
+      if (this.categoriesLoaded)
+        localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(data))
     })
 
     this.itemsSubject.subscribe(data => {
-      localStorage.setItem(this.ITEMS_KEY, JSON.stringify(data))
+      if (this.itemsLoaded)
+        localStorage.setItem(this.ITEMS_KEY, JSON.stringify(data))
     })
 
     this.placesSubject.subscribe(data => {
-      localStorage.setItem(this.PLACES_KEY, JSON.stringify(data))
+      if (this.placesLoaded)
+        localStorage.setItem(this.PLACES_KEY, JSON.stringify(data))
     })
   }
 
@@ -58,7 +61,7 @@ export class DataServices {
   }
 
   get categories() {
-    if(!this.categoriesLoaded){
+    if (!this.categoriesLoaded) {
       this.categoriesLoaded = true
       this.loadCategories()
     }
@@ -70,7 +73,7 @@ export class DataServices {
   }
 
   get items() {
-    if(!this.itemsLoaded){
+    if (!this.itemsLoaded) {
       this.itemsLoaded = true
       this.loadItems()
     }
@@ -82,7 +85,7 @@ export class DataServices {
   }
 
   get places() {
-    if(!this.placesLoaded){
+    if (!this.placesLoaded) {
       this.placesLoaded = true
       this.loadPlaces()
     }

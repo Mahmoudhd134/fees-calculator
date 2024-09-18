@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons [slot]="slot">
+    <ion-buttons [slot]="buttonsSlot">
       <ion-menu-button *ngIf="hasMenuButton"></ion-menu-button>
       <ion-back-button defaultHref="/" *ngIf="hasBackButton"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{title}}</ion-title>
+    <ion-title [slot]="titleSlot">{{title}}</ion-title>
+    <ng-content></ng-content>
   </ion-toolbar>
 </ion-header>

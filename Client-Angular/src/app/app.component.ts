@@ -1,6 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ThemeServices} from "../services/theme-services";
-import {DataServices} from "../services/data-services";
 
 @Component({
   selector: 'app-root',

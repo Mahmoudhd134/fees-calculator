@@ -1,7 +1,7 @@
 import {CategoryModel} from "./category-models";
 
 export interface ItemModel {
-  id: number,
+  id: string,
   name: string,
   category?: CategoryModel
 }

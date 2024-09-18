@@ -1,5 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ThemeServices} from "../services/theme-services";
+import {DataServices} from "../services/data-services";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,6 @@ import {ThemeServices} from "../services/theme-services";
 })
 export class AppComponent implements OnInit {
   private darkModeService = inject(ThemeServices)
-
 
   ngOnInit() {
     this.darkModeService.initDarkMode()

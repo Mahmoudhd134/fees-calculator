@@ -1,4 +1,4 @@
 export interface PlaceModel {
-  id: number,
+  id: string,
   name: string
 }

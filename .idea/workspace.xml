@@ -5,48 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1cafcec-8d1b-4aa3-b0f8-360997ea602a" name="Changes" comment="refactoring">
-      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/extensions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/tasks.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ionic.config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-home/app-home.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-home/app-home.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-home/app-home.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-ionic-header/app-ionic-header.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-ionic-header/app-ionic-header.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-ionic-header/app-ionic-header.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.routes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/settings/settings.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/settings/settings.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/settings/settings.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/category-models.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/item.models.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/place.models.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/category-services.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/item-services.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/place-services.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/theme-services.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/variables.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.spec.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client-Angular/src/services/data-services.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/FeesCalcer/.idea/.idea.FeesCalcer/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/API/FeesCalcer/.idea/.idea.FeesCalcer/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/FeesCalcer/FeesCalcer/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/FeesCalcer/FeesCalcer/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,20 +36,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Mahmoud\\WebstormProjects\\calc-fees\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Mahmoud/WebstormProjects/calc-fees/Client-Angular",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "C:\\Users\\Mahmoud\\WebstormProjects\\calc-fees\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
@@ -120,6 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1726560946571</updated>
       <workItem from="1726560952403" duration="18099000" />
+      <workItem from="1726650287921" duration="25000" />
     </task>
     <task id="LOCAL-00001" summary="add basic setup">
       <option name="closed" value="true" />

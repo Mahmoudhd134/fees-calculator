@@ -2,7 +2,7 @@
   <ion-menu contentId="main-content">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Menu</ion-title>
+        <ion-title>{{ 'Menu.Title'|translate }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -11,19 +11,25 @@
         <ion-menu-toggle autoHide="false">
           <ion-item routerLink="/" routerDirection="forward" [routerLinkActiveOptions]="{exact:true}"
                     routerLinkActive="active-link">
-            Home
+            {{ 'Menu.Home'|translate }}
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle autoHide="false">
           <ion-item routerLink="/places" routerDirection="forward" routerLinkActive="active-link">
-            Places
+            {{ 'Menu.Places'|translate }}
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/categories" routerDirection="forward" routerLinkActive="active-link">
+            {{ 'Menu.Categories'|translate }}
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle autoHide="false">
           <ion-item routerLink="/settings" routerDirection="forward" routerLinkActive="active-link">
-            Settings
+            {{ 'Menu.Settings'|translate }}
           </ion-item>
         </ion-menu-toggle>
 

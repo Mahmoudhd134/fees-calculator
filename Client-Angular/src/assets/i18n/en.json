@@ -1,0 +1,31 @@
+{
+  "Menu": {
+    "Title": "Menu",
+    "Home": "Home",
+    "Settings": "Settings",
+    "Places": "Places"
+  },
+  "Home": {
+    "Title": "Home",
+    "Welcome": "Welcome"
+  },
+  "Settings": {
+    "Title": "Settings",
+    "AppearanceOption": "Appearance",
+    "Theme": "Theme",
+    "ThemeModes": {
+      "Dark": "Dark",
+      "Light": "Light",
+      "System": "System"
+    }
+  },
+  "Options": {
+    "Ok": "Ok",
+    "Cancel": "Cancel",
+    "ReturnBack": "Return Back",
+    "Edit": "Edit",
+    "Save": "Save",
+    "Add": "Add",
+    "Delete": "Delete"
+  }
+}

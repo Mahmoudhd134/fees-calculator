@@ -1,0 +1,19 @@
+<div class="ion-page">
+  <app-app-ionic-header [title]="'Categories.Title'|translate" hasBackButton/>
+  <ion-content>
+    <div class="container ion-padding mx-auto">
+
+      <ion-list>
+        <ion-item *ngFor="let category of categories">
+          <ion-label>{{ category.name }}</ion-label>
+          <ion-buttons>
+            <ion-button color="primary" (click)="handleEdit(category)">{{ 'Options.Edit'|translate }}</ion-button>
+            <ion-button color="danger" (click)="handleDelete(category)">{{ 'Options.Delete'|translate }}</ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" (click)="handleAdd()" class="mt-5">{{ 'Options.Add'|translate }}</ion-button>
+
+    </div>
+  </ion-content>
+</div>

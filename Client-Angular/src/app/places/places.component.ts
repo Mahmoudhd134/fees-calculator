@@ -3,6 +3,7 @@ import {PlaceServices} from "../../services/place-services";
 import {PlaceModel} from "../../models/place.models";
 import {Subscription} from "rxjs";
 import {AlertController, IonAlert, LoadingController} from "@ionic/angular";
+import {LanguageServices} from "../../services/language-services";
 
 @Component({
   selector: 'app-places',
@@ -15,7 +16,9 @@ export class PlacesComponent implements OnInit, OnDestroy {
 
   places = [] as PlaceModel[]
 
-  constructor(private placesServices: PlaceServices, private alertController: AlertController, private x: LoadingController) {
+  constructor(private placesServices: PlaceServices,
+              private alertController: AlertController,
+              private langServices: LanguageServices) {
   }
 
 
@@ -27,14 +30,14 @@ export class PlacesComponent implements OnInit, OnDestroy {
 
   handleDelete(place: PlaceModel) {
     this.alertController.create({
-      header: 'Delete Place',
-      subHeader: 'Deleting place ' + place.name,
+      header: this.langServices.gt('Places.Delete'),
+      subHeader: `${this.langServices.gt('Places.DeleteMsg')} ${place.name}`,
       buttons: [
         {
-          text: 'Delete',
+          text: this.langServices.gt('Options.Delete'),
           handler: () => this.placesServices.remove(place.id),
         },
-        'Cancel'
+        this.langServices.gt('Options.Cancel')
       ],
     })
       .then(x => x.present())
@@ -42,18 +45,18 @@ export class PlacesComponent implements OnInit, OnDestroy {
 
   handleAdd() {
     this.alertController.create({
-      header: 'Add New Place',
+      header: this.langServices.gt('Options.Add'),
       buttons: [
         {
-          text: 'Add',
+          text: this.langServices.gt('Options.Add'),
           handler: (data) => data.name.trim().length > 0 && this.placesServices.add(data.name),
         },
-        'Cancel'
+        this.langServices.gt('Options.Cancel')
       ],
       inputs: [
         {
           name: 'name',
-          placeholder: 'Name',
+          placeholder: this.langServices.gt('Options.Name'),
           type: 'text',
         },
       ]
@@ -63,19 +66,20 @@ export class PlacesComponent implements OnInit, OnDestroy {
 
   handleEdit(place: PlaceModel) {
     this.alertController.create({
-      header: 'Edit',
+      header: this.langServices.gt('Places.Edit'),
       buttons: [
         {
-          text: 'Save',
+          text: this.langServices.gt('Options.Save'),
           handler: (data) => data.name.trim().length > 0 && this.placesServices.edit(data),
         },
-        'Cancel'
+        this.langServices.gt('Options.Cancel')
       ],
       inputs: [
         {
           name: 'name',
-          placeholder: 'Name',
+          placeholder: this.langServices.gt('Options.Name'),
           type: 'text',
+          label: this.langServices.gt('Options.Name'),
           value: place.name,
         },
         {

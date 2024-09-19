@@ -11,6 +11,15 @@ import {AppIonicHeaderComponent} from "./app-ionic-header/app-ionic-header.compo
 import {SettingsComponent} from "./settings/settings.component";
 import {FormsModule} from "@angular/forms";
 import {PlacesComponent} from "./places/places.component";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {CategoriesComponent} from "./categories/categories.component";
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 
 @NgModule({
   declarations: [
@@ -18,7 +27,8 @@ import {PlacesComponent} from "./places/places.component";
     AppHomeComponent,
     AppIonicHeaderComponent,
     SettingsComponent,
-    PlacesComponent
+    PlacesComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +37,15 @@ import {PlacesComponent} from "./places/places.component";
     IonRouterLink,
     IonRouterLinkWithHref,
     FormsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
+
   ],
   providers: [
     provideRouter(routes),

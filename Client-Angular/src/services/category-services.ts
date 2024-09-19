@@ -1,21 +1,38 @@
 import {Injectable} from "@angular/core";
 import {CategoryModel} from "../models/category-models";
+import {DataStoreServices} from "./data-store-services.service";
+import {BehaviorSubject} from "rxjs";
+import {PlaceModel} from "../models/place.models";
+import {v4 as uuidv4} from "uuid";
 
 @Injectable({providedIn: 'root'})
 export class CategoryServices {
+  categoriesSubject = new BehaviorSubject([] as CategoryModel[])
 
-  getAll(): CategoryModel[] {
-    return []
+  constructor(private dataStore: DataStoreServices) {
+    this.categoriesSubject.next(dataStore.categories)
+  }
+
+  getAll() {
+    return this.categoriesSubject.asObservable()
   }
 
   add(name: string) {
+    const category: CategoryModel = {
+      id: uuidv4(),
+      name
+    }
+    this.dataStore.setCategories([...this.dataStore.categories, category])
+    this.categoriesSubject.next([...this.categoriesSubject.value, category])
   }
 
-  remove(id: number) {
-
+  remove(id: string) {
+    this.dataStore.setCategories(this.dataStore.categories.filter(x => x.id != id))
+    this.categoriesSubject.next(this.categoriesSubject.value.filter(x => x.id != id))
   }
 
   edit(category: CategoryModel) {
-
+    this.dataStore.setCategories(this.dataStore.categories.map(x => x.id == category.id ? category : x))
+    this.categoriesSubject.next(this.categoriesSubject.value.map(x => x.id == category.id ? category : x))
   }
 }

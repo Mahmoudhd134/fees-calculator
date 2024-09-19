@@ -26,10 +26,10 @@ export class ThemeServices {
   }
 
   initDarkMode() {
-    this.toggleDarkPalette(this.currentMode())
+    this.toggleDarkPalette(this.currentTheme())
   }
 
-  currentMode(): Theme {
+  currentTheme(): Theme {
     const localSettings = localStorage.getItem(this.LocalStorageKey)
     return localSettings == null ? Theme.System : Number(localSettings)
   }

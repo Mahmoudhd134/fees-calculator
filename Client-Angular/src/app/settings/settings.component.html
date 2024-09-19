@@ -1,20 +1,35 @@
 <div class="ion-page">
-  <app-app-ionic-header title="Settings" hasMenuButton/>
+  <app-app-ionic-header [title]="'Settings.Title'|translate" hasMenuButton/>
 
   <ion-content>
     <div class='container p-4 mx-auto'>
-      <ion-list-header>Appearance</ion-list-header>
+      <ion-list-header>{{ 'Settings.AppearanceOption'|translate }}</ion-list-header>
       <ion-list [inset]="true">
         <ion-item>
           <ion-select
-            label="Lighting Mode"
+            [label]="'Settings.Theme'|translate"
             labelPlacement="floating"
-            [value]="currentMode"
-            (ionChange)="toggleChange($event)"
+            [value]="currentTheme"
+            (ionChange)="toggleTheme($event)"
           >
-            <ion-select-option [value]="LightMode.Light">Light</ion-select-option>
-            <ion-select-option [value]="LightMode.Dark">Dark</ion-select-option>
-            <ion-select-option [value]="LightMode.System">System</ion-select-option>
+            <ion-select-option [value]="LightMode.Light">{{ 'Settings.ThemeModes.Light'|translate }}</ion-select-option>
+            <ion-select-option [value]="LightMode.Dark">{{ 'Settings.ThemeModes.Dark'|translate }}</ion-select-option>
+            <ion-select-option [value]="LightMode.System">{{ 'Settings.ThemeModes.System'|translate }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <ion-list [inset]="true">
+        <ion-item>
+          <ion-select
+            [label]="'Settings.Lang.Label'|translate"
+            labelPlacement="floating"
+            [value]="currentLang"
+            (ionChange)="toggleLang($event)"
+          >
+            <ion-select-option value="ar">{{ 'Settings.Lang.Arabic'|translate }}</ion-select-option>
+            <ion-select-option value="en">{{ 'Settings.Lang.English'|translate }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>

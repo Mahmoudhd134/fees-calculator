@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {LOCALE_ID, NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {provideRouter, RouterModule, RouterOutlet} from "@angular/router";
@@ -15,6 +15,12 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CategoriesComponent} from "./categories/categories.component";
+import {registerLocaleData} from '@angular/common';
+import localeAr from '@angular/common/locales/ar';
+import {LanguageServices} from "../services/language-services";
+import {AllPurchasesComponent} from "./home/all-purchases/all-purchases.component";
+
+registerLocaleData(localeAr, 'ar')
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -28,7 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppIonicHeaderComponent,
     SettingsComponent,
     PlacesComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    AllPurchasesComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +57,14 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideIonicAngular()
+    provideIonicAngular(),
+    {
+      provide: LOCALE_ID,
+      useFactory: (langServices: LanguageServices) => {
+        return langServices.currentLang
+      },
+      deps: [LanguageServices]
+    }
   ],
   bootstrap: [AppComponent]
 })

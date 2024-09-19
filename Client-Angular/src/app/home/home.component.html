@@ -3,8 +3,56 @@
   <ion-content>
     <div class="container ion-padding mx-auto">
 
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci, alias corporis dignissimos doloribus ea
-      excepturi exercitationem facere fugiat labore neque nesciunt nisi quibusdam quo quos rerum ut vitae voluptate?
+      <div class="flex flex-col gap-5 w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto">
+        <div class="flex justify-around gap-10">
+          <ion-select [label]="'Home.SelectPlaceLabel'|translate" labelPlacement="floating" [(ngModel)]="selectedPlace">
+            <ion-select-option *ngFor="let place of places" [value]="place">
+              {{ place.name }}
+            </ion-select-option>
+          </ion-select>
+
+          <ion-select [label]="'Home.SelectCategoryLabel'|translate" labelPlacement="floating"
+                      [(ngModel)]="selectedCategory">
+            <ion-select-option *ngFor="let cat of categories" [value]="cat">
+              {{ cat.name }}
+            </ion-select-option>
+          </ion-select>
+        </div>
+
+        <ion-input type="number" [(ngModel)]="selectedPrice" [label]="'Home.SelectPriceLabel'|translate"
+                   labelPlacement="floating"/>
+
+        <ion-button (click)="savePurchase()" expand="block">{{ 'Home.AddPurchaseButton'|translate }}</ion-button>
+
+      </div>
+
+      <div>
+        <h3 class="ion-text-center ion-margin">{{ 'Home.LastPurchasesLabel'|translate }}</h3>
+        <ion-list inset>
+          <ion-item *ngFor="let purchase of lastPurchases">
+            <div class="flex flex-col gap-3 p-3">
+              <ion-label class="w-fit block">
+                {{ 'Home.Day'|translate }}: {{ purchase.date|date:'EEEE d MMMM' }}
+              </ion-label>
+
+              <ion-label class="w-fit block">
+                {{ 'Home.Category'|translate }}: {{ purchase.category.name }}
+              </ion-label>
+
+              <ion-label class="w-fit block">
+                {{ 'Home.Place'|translate }}: {{ purchase.place.name }}
+              </ion-label>
+
+              <ion-label class="w-fit block">
+                {{ 'Home.Price'|translate }}: {{ purchase.priceInEGP|currency:'EGP' }}
+              </ion-label>
+
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <ion-button expand="block">{{ 'Home.AllPurchases'|translate }}</ion-button>
 
     </div>
   </ion-content>

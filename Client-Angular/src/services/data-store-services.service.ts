@@ -42,7 +42,7 @@ export class DataStoreServices {
 
   loadPurchases() {
     const purchases = JSON.parse(localStorage.getItem(this.PURCHASES_KEY) ?? '[]') as PurchaseModel[]
-    this.purchasesSubject.next(purchases)
+    this.purchasesSubject.next(purchases.map(p => ({...p, date: new Date(p.date)})))
   }
 
   loadPlaces() {
@@ -73,7 +73,7 @@ export class DataStoreServices {
   }
 
   get purchases() {
-    if (!this.placesLoaded) {
+    if (!this.purchasesLoaded) {
       this.purchasesLoaded = true
       this.loadPurchases()
     }

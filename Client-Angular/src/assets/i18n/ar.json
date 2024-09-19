@@ -7,7 +7,16 @@
     "Categories": "الفئات"
   },
   "Home": {
-    "Title": "حاسب المصاريف"
+    "Title": "حاسب المصاريف",
+    "SelectPlaceLabel": "اختر مكاناً",
+    "SelectCategoryLabel": "اختر فئتاً",
+    "SelectPriceLabel": "سعر الشراء",
+    "AddPurchaseButton": "أضف عملية شراء",
+    "LastPurchasesLabel": "آخر عمليات الشراء فى هذا اليوم",
+    "Day": "اليوم",
+    "Category": "الفئة",
+    "Place": "المكان",
+    "Price": "السعر"
   },
   "Places": {
     "Title": "الأماكن",

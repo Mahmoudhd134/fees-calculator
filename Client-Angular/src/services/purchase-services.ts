@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {DataStoreServices} from "./data-store-services.service";
 import {BehaviorSubject} from "rxjs";
-import {PurchaseModel} from "../models/purchase.models";
+import {PurchaseCategory, PurchaseModel} from "../models/purchase.models";
 import {PlaceModel} from "../models/place.models";
 import {CategoryModel} from "../models/category-models";
 import {v4 as uuidv4} from 'uuid'

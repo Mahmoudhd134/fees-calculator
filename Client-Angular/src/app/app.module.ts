@@ -18,7 +18,7 @@ import {CategoriesComponent} from "./categories/categories.component";
 import {registerLocaleData} from '@angular/common';
 import localeAr from '@angular/common/locales/ar';
 import {LanguageServices} from "../services/language-services";
-import {AllPurchasesComponent} from "./home/all-purchases/all-purchases.component";
+import {AllPurchasesComponent} from "./all-purchases/all-purchases.component";
 
 registerLocaleData(localeAr, 'ar')
 

@@ -8,3 +8,9 @@ export interface PurchaseModel {
   priceInEGP: number,
   date: Date
 }
+
+export interface PurchaseCategory {
+  category: CategoryModel
+  purchases: PurchaseModel[]
+  totalPrice: number
+}

@@ -1,0 +1,25 @@
+<div class="ion-page">
+  <app-app-ionic-header [title]="'AllPurchases.Title'|translate" hasBackButton/>
+  <ion-content>
+    <div class="container ion-padding mx-auto">
+
+      <div *ngFor="let cat of cats">
+        <h3 (click)="expandedCats.set(cat.category.id,!expandedCats.get(cat.category.id)!)">
+          {{ cat.category.name }} {{ cat.totalPrice }}
+          <ion-icon [name]="expandedCats.get(cat.category.id) ? 'arrow-up' : 'arrow-down'"/>
+        </h3>
+
+        <div class="transition-all duration-[1500ms] ease-in-out overflow-hidden"
+             [ngClass]="[
+            expandedCats.get(cat.category.id) ? 'max-h-screen':'max-h-0'
+            ]">
+          <p *ngFor="let purchase of cat.purchases">
+            {{ purchase.date|date:'EEEE d MMMM' }}
+          </p>
+        </div>
+      </div>
+
+
+    </div>
+  </ion-content>
+</div>

@@ -3,21 +3,41 @@
   <ion-content>
     <div class="container ion-padding mx-auto">
 
-      <div *ngFor="let cat of cats">
-        <h3 (click)="expandedCats.set(cat.category.id,!expandedCats.get(cat.category.id)!)">
-          {{ cat.category.name }} {{ cat.totalPrice }}
-          <ion-icon [name]="expandedCats.get(cat.category.id) ? 'arrow-up' : 'arrow-down'"/>
-        </h3>
+      <ion-item-group>
+        <ion-item *ngFor="let cat of cats" class="p-3">
+          <div class="flex flex-col w-full">
+            <div class='flex justify-between items-baseline cursor-pointer'
+                 (click)="expandedCats.set(cat.category.id,!expandedCats.get(cat.category.id)!)">
+              <ion-label>{{ cat.category.name }} {{ cat.totalPrice|currency:'EGP' }}</ion-label>
+              <ion-icon name="arrow-down"
+                        class="transition-all duration-500 ease-in-out"
+                        [ngClass]="expandedCats.get(cat.category.id) ? '-rotate-180' : 'rotate-0'"/>
+            </div>
 
-        <div class="transition-all duration-[1500ms] ease-in-out overflow-hidden"
-             [ngClass]="[
-            expandedCats.get(cat.category.id) ? 'max-h-screen':'max-h-0'
+            <div class="transition-all duration-500 ease-in-out origin-top overflow-hidden"
+                 [ngClass]="[
+            expandedCats.get(cat.category.id) ? 'scale-y-100 h-auto':'scale-y-0 h-0'
             ]">
-          <p *ngFor="let purchase of cat.purchases">
-            {{ purchase.date|date:'EEEE d MMMM' }}
-          </p>
-        </div>
-      </div>
+              <ion-list inset>
+                <ion-item *ngFor="let purchase of cat.purchases">
+                  <div class="flex flex-col gap-1 p-3 w-full">
+                    <ion-label><b>{{ 'Home.Day'|translate }}:</b> {{ purchase.date|date:'EEEE d MMMM' }}</ion-label>
+
+                    <ion-label><b>{{ 'Home.Category'|translate }}:</b> {{ purchase.category.name }}</ion-label>
+
+                    <ion-label><b>{{ 'Home.Place'|translate }}:</b> {{ purchase.place.name }}</ion-label>
+
+                    <ion-label><b>{{ 'Home.Price'|translate }}:</b> {{ purchase.priceInEGP|currency:'EGP' }}</ion-label>
+
+                    <ion-button color="danger" (click)="deleteHandler(purchase)">{{ 'Options.Delete'|translate }}
+                    </ion-button>
+                  </div>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+        </ion-item>
+      </ion-item-group>
 
 
     </div>

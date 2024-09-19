@@ -42,6 +42,10 @@ export class AllPurchasesComponent implements OnInit, OnDestroy {
     })
   }
 
+  deleteHandler(purchase: PurchaseModel) {
+    console.log(purchase)
+  }
+
   private getPurchasesForCategory(id: string) {
     return this.purchases.filter(x => x.category.id == id)
   }

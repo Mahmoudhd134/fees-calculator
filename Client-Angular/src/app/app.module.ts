@@ -6,7 +6,7 @@ import {routes} from "./app.routes";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 import {IonRouterLink, IonRouterLinkWithHref, provideIonicAngular} from "@ionic/angular/standalone";
 import {IonicModule} from "@ionic/angular";
-import {AppHomeComponent} from "./app-home/app-home.component";
+import {HomeComponent} from "./home/home.component";
 import {AppIonicHeaderComponent} from "./app-ionic-header/app-ionic-header.component";
 import {SettingsComponent} from "./settings/settings.component";
 import {FormsModule} from "@angular/forms";
@@ -24,7 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    AppHomeComponent,
+    HomeComponent,
     AppIonicHeaderComponent,
     SettingsComponent,
     PlacesComponent,

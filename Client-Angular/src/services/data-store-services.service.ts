@@ -1,21 +1,21 @@
 ﻿import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import {CategoryModel} from "../models/category-models";
-import {ItemModel} from "../models/item.models";
+import {PurchaseModel} from "../models/purchase.models";
 import {PlaceModel} from "../models/place.models";
 
 @Injectable({providedIn: 'root'})
 export class DataStoreServices {
-  CATEGORIES_KEY = 'categories'
-  ITEMS_KEY = 'items'
-  PLACES_KEY = 'places'
+  private CATEGORIES_KEY = 'categories'
+  private PURCHASES_KEY = 'purchases'
+  private PLACES_KEY = 'places'
 
   private categoriesSubject = new BehaviorSubject([] as CategoryModel[])
-  private itemsSubject = new BehaviorSubject([] as ItemModel[])
+  private purchasesSubject = new BehaviorSubject([] as PurchaseModel[])
   private placesSubject = new BehaviorSubject([] as PlaceModel[])
 
   private categoriesLoaded = false
-  private itemsLoaded = false
+  private purchasesLoaded = false
   private placesLoaded = false
 
   constructor() {
@@ -24,9 +24,9 @@ export class DataStoreServices {
         localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(data))
     })
 
-    this.itemsSubject.subscribe(data => {
-      if (this.itemsLoaded)
-        localStorage.setItem(this.ITEMS_KEY, JSON.stringify(data))
+    this.purchasesSubject.subscribe(data => {
+      if (this.purchasesLoaded)
+        localStorage.setItem(this.PURCHASES_KEY, JSON.stringify(data))
     })
 
     this.placesSubject.subscribe(data => {
@@ -40,9 +40,9 @@ export class DataStoreServices {
     this.categoriesSubject.next(categories)
   }
 
-  loadItems() {
-    const items = JSON.parse(localStorage.getItem(this.ITEMS_KEY) ?? '[]') as ItemModel[]
-    this.itemsSubject.next(items)
+  loadPurchases() {
+    const purchases = JSON.parse(localStorage.getItem(this.PURCHASES_KEY) ?? '[]') as PurchaseModel[]
+    this.purchasesSubject.next(purchases)
   }
 
   loadPlaces() {
@@ -51,12 +51,12 @@ export class DataStoreServices {
   }
 
   load() {
-    this.loadItems()
+    this.loadPurchases()
     this.loadCategories()
     this.loadPlaces()
   }
 
-  setCategories(categories: CategoryModel[]) {
+  set categories(categories: CategoryModel[]) {
     this.categoriesSubject.next(categories)
   }
 
@@ -68,19 +68,19 @@ export class DataStoreServices {
     return this.categoriesSubject.value
   }
 
-  setItems(items: ItemModel[]) {
-    this.itemsSubject.next(items)
+  set purchases(purchases: PurchaseModel[]) {
+    this.purchasesSubject.next(purchases)
   }
 
-  get items() {
-    if (!this.itemsLoaded) {
-      this.itemsLoaded = true
-      this.loadItems()
+  get purchases() {
+    if (!this.placesLoaded) {
+      this.purchasesLoaded = true
+      this.loadPurchases()
     }
-    return this.itemsSubject.value
+    return this.purchasesSubject.value
   }
 
-  setPlaces(places: PlaceModel[]) {
+  set places(places: PlaceModel[]) {
     this.placesSubject.next(places)
   }
 

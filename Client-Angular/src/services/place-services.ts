@@ -22,17 +22,17 @@ export class PlaceServices {
       id: uuidv4(),
       name
     }
-    this.dataStore.setPlaces([...this.dataStore.places, place])
+    this.dataStore.places = [...this.dataStore.places, place]
     this.placesSubject.next([...this.placesSubject.value, place])
   }
 
   remove(id: string) {
-    this.dataStore.setPlaces(this.dataStore.places.filter(x => x.id != id))
+    this.dataStore.places = this.dataStore.places.filter(x => x.id != id)
     this.placesSubject.next(this.placesSubject.value.filter(x => x.id != id))
   }
 
   edit(place: PlaceModel) {
-    this.dataStore.setPlaces(this.dataStore.places.map(x => x.id == place.id ? place : x))
+    this.dataStore.places = this.dataStore.places.map(x => x.id == place.id ? place : x)
     this.placesSubject.next(this.placesSubject.value.map(x => x.id == place.id ? place : x))
   }
 }

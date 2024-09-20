@@ -3,41 +3,29 @@
   <ion-content>
     <div class="container ion-padding mx-auto">
 
-      <ion-item-group>
-        <ion-item *ngFor="let cat of cats" class="p-3">
-          <div class="flex flex-col w-full">
-            <div class='flex justify-between items-baseline cursor-pointer'
-                 (click)="expandedCats.set(cat.category.id,!expandedCats.get(cat.category.id)!)">
-              <ion-label>{{ cat.category.name }} {{ cat.totalPrice|currency:'EGP' }}</ion-label>
-              <ion-icon name="arrow-down"
-                        class="transition-all duration-500 ease-in-out"
-                        [ngClass]="expandedCats.get(cat.category.id) ? '-rotate-180' : 'rotate-0'"/>
-            </div>
+      <ion-accordion-group [multiple]="true">
+        <ion-accordion *ngFor="let cat of cats; trackBy: trackByCategoryId" [value]="cat.category.id">
+          <ion-item slot="header">
+            <ion-label>{{ cat.category.name }} {{ cat.totalPrice|currency:'EGP' }}</ion-label>
+          </ion-item>
+          <ion-list inset slot="content">
+            <ion-item *ngFor="let purchase of cat.purchases; trackBy: trackByPurchaseId">
+              <div class="flex flex-col gap-1 p-3 w-full">
+                <ion-label><b>{{ 'Home.Day'|translate }}:</b> {{ purchase.date|date:'EEEE d MMMM' }}</ion-label>
 
-            <div class="transition-all duration-500 ease-in-out origin-top overflow-hidden"
-                 [ngClass]="[
-            expandedCats.get(cat.category.id) ? 'scale-y-100 h-auto':'scale-y-0 h-0'
-            ]">
-              <ion-list inset>
-                <ion-item *ngFor="let purchase of cat.purchases">
-                  <div class="flex flex-col gap-1 p-3 w-full">
-                    <ion-label><b>{{ 'Home.Day'|translate }}:</b> {{ purchase.date|date:'EEEE d MMMM' }}</ion-label>
+                <ion-label><b>{{ 'Home.Category'|translate }}:</b> {{ purchase.category.name }}</ion-label>
 
-                    <ion-label><b>{{ 'Home.Category'|translate }}:</b> {{ purchase.category.name }}</ion-label>
+                <ion-label><b>{{ 'Home.Place'|translate }}:</b> {{ purchase.place.name }}</ion-label>
 
-                    <ion-label><b>{{ 'Home.Place'|translate }}:</b> {{ purchase.place.name }}</ion-label>
+                <ion-label><b>{{ 'Home.Price'|translate }}:</b> {{ purchase.priceInEGP|currency:'EGP' }}</ion-label>
 
-                    <ion-label><b>{{ 'Home.Price'|translate }}:</b> {{ purchase.priceInEGP|currency:'EGP' }}</ion-label>
-
-                    <ion-button color="danger" (click)="deleteHandler(purchase)">{{ 'Options.Delete'|translate }}
-                    </ion-button>
-                  </div>
-                </ion-item>
-              </ion-list>
-            </div>
-          </div>
-        </ion-item>
-      </ion-item-group>
+                <ion-button color="danger" (click)="deleteHandler(purchase)">{{ 'Options.Delete'|translate }}
+                </ion-button>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-accordion>
+      </ion-accordion-group>
 
 
     </div>

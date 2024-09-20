@@ -15,7 +15,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CategoriesComponent} from "./categories/categories.component";
-import {registerLocaleData} from '@angular/common';
+import {CurrencyPipe, DatePipe, registerLocaleData} from '@angular/common';
 import localeAr from '@angular/common/locales/ar';
 import {LanguageServices} from "../services/language-services";
 import {AllPurchasesComponent} from "./all-purchases/all-purchases.component";
@@ -64,7 +64,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         return langServices.currentLang
       },
       deps: [LanguageServices]
-    }
+    },
+    DatePipe,
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

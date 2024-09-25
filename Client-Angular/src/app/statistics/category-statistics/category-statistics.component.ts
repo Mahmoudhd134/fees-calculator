@@ -7,7 +7,7 @@ import {PurchaseServices} from "../../../services/purchase-services";
 import {CategorizeMonthStatistics} from "../../../models/purchase.models";
 import {DatePipe} from "@angular/common";
 import {LanguageServices} from "../../../services/language-services";
-import {ChartData} from "chart.js";
+import {ChartData, ChartOptions} from "chart.js";
 
 @Component({
   selector: 'app-category-statistics',
@@ -22,27 +22,32 @@ export class CategoryStatisticsComponent implements OnInit, OnDestroy {
   selectedYear: number = 0
   years: number[] = []
 
-  categoriesStatistics: CategorizeMonthStatistics[][] = []
-  monthsName: string[] = []
+  private _categoriesStatistics: CategorizeMonthStatistics[][] = []
+  allMonthsName: string[] = []
 
   lineChartData: ChartData = {datasets: []};
 
-  lineChartOptions = {
+  selectQuarter = 0
+
+  get monthsName() {
+    return this.allMonthsName.slice(this.selectQuarter * 3, this.selectQuarter * 3 + 3)
+  }
+
+
+  lineChartOptions: ChartOptions = {
     responsive: true,
     scales: {
       x: {
-        beginAtZero: true,
         title: {
           display: true,
           text: this.ls.gt('CategoryStatistics.MonthsAxis')
         }
       },
       y: {
-        beginAtZero: true,
         title: {
           display: true,
           text: this.ls.gt('CategoryStatistics.MoneyAxis')
-        }
+        },
       }
     }
   };
@@ -62,8 +67,11 @@ export class CategoryStatisticsComponent implements OnInit, OnDestroy {
     if (this.years.length > 0) {
       this.selectedYear = this.years[0]
     }
-    this.monthsName = Array.from(Array(12).keys())
+    this.allMonthsName = Array.from(Array(12).keys())
       .map(x => this.datePipe.transform(new Date(new Date().setMonth(x)), 'MMMM') ?? 'aaa')
+
+    const currentMonth = new Date().getMonth()
+    this.selectQuarter = Math.floor(currentMonth / 3)
 
   }
 
@@ -71,15 +79,21 @@ export class CategoryStatisticsComponent implements OnInit, OnDestroy {
     this.purSub.unsubscribe()
     this.purSub = this.purchaseService.getCategorizeStatistics(this.selectedCategories, this.selectedYear)
       .subscribe(data => {
-        this.categoriesStatistics = data
-        console.log(data)
-        this.lineChartData = {
-          datasets: data.map(cat => ({
-            data: cat.map(xx => xx.price),
-            label: cat[0].category.name
-          }))
-        }
+        this._categoriesStatistics = data
+        this.setLineChart()
       })
+  }
+
+  setLineChart(quarter: number = this.selectQuarter) {
+    if (quarter !== this.selectQuarter)
+      this.selectQuarter = quarter
+
+    this.lineChartData = {
+      datasets: this._categoriesStatistics.map(cat => ({
+        data: cat.slice(this.selectQuarter * 3, this.selectQuarter * 3 + 3).map(xx => xx.price),
+        label: cat[0].category.name
+      }))
+    }
   }
 
   selectAll(select: boolean) {

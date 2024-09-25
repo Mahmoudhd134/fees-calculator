@@ -44,4 +44,23 @@
             [options]="lineChartOptions"
     ></canvas>
   </ion-item>
+  <ion-item>
+    <ion-buttons>
+      <ion-button (click)="setLineChart(0)" [ngClass]="[selectQuarter == 0 ? 'text-blue-900':'']">
+        {{ allMonthsName[0] }}-{{ allMonthsName[2] }}
+      </ion-button>
+
+      <ion-button (click)="setLineChart(1)" [ngClass]="[selectQuarter == 1 ? 'text-blue-900':'']">
+        {{ allMonthsName[3] }}-{{ allMonthsName[5] }}
+      </ion-button>
+
+      <ion-button (click)="setLineChart(2)" [ngClass]="[selectQuarter == 2 ? 'text-blue-900':'']">
+        {{ allMonthsName[6] }}-{{ allMonthsName[8] }}
+      </ion-button>
+
+      <ion-button (click)="setLineChart(3)" [ngClass]="[selectQuarter == 3 ? 'text-blue-900':'']">
+        {{ allMonthsName[9] }}-{{ allMonthsName[11] }}
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
 </ion-list>

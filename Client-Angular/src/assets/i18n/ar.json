@@ -49,6 +49,13 @@
     "Overall": "عام",
     "Categorize": "فئات"
   },
+  "CategoryStatistics": {
+    "ChoseCategoriesLabel": "اختر الفئات التي تريد مقارنتها",
+    "SelectAllCategoriesButton": "حدد كل الفئات",
+    "DeSelectAllCategoriesButton": "إلغاء تحديد كل الفئات",
+    "MonthsAxis": "الشهور",
+    "MoneyAxis": "المبلغ"
+  },
   "Settings": {
     "Title": "الإعدادات",
     "AppearanceOption": "المظهر",

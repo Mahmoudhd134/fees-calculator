@@ -19,3 +19,8 @@ export interface PurchasesMonthStatistics {
   month: Date
   value: number
 }
+
+export interface CategorizeMonthStatistics {
+  category: CategoryModel,
+  price: number
+}

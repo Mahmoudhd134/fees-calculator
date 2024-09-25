@@ -1,3 +1,47 @@
 <ion-list [inset]="true">
-  asdfsd
+  <ion-item>
+    <ion-buttons>
+      <ion-button (click)="selectAll(true)"
+                  [ngClass]="[
+      selectedCategories.length == categories.length ?'text-blue-800':''
+      ]">
+        {{ 'CategoryStatistics.SelectAllCategoriesButton'|translate }}
+      </ion-button>
+      <ion-button (click)="selectAll(false)"
+                  [ngClass]="[
+      selectedCategories.length == 0 ?'text-blue-800':''
+      ]">
+        {{ 'CategoryStatistics.DeSelectAllCategoriesButton'|translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+  <ion-item>
+    <ion-select
+      [label]="'CategoryStatistics.ChoseCategoriesLabel'|translate "
+      labelPlacement="floating"
+      multiple
+      [(ngModel)]="selectedCategories"
+      (ionChange)="updateChart()">
+      <ion-select-option *ngFor="let cat of categories" [value]="cat.id">
+        {{ cat.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-select
+      [label]="'Statistics.YearLabel'|translate"
+      labelPlacement="floating"
+      [(ngModel)]="selectedYear"
+      (ionChange)="updateChart()">
+      <ion-select-option *ngFor="let year of years" [value]='year'>{{ year }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <canvas baseChart
+            [datasets]="lineChartData.datasets"
+            [labels]="monthsName"
+            [options]="lineChartOptions"
+    ></canvas>
+  </ion-item>
 </ion-list>

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {DataStoreServices} from "./data-store-services.service";
 import {BehaviorSubject, filter, map, reduce} from "rxjs";
-import {PurchaseCategory, PurchaseModel} from "../models/purchase.models";
+import {CategorizeMonthStatistics, PurchaseCategory, PurchaseModel} from "../models/purchase.models";
 import {PlaceModel} from "../models/place.models";
 import {CategoryModel} from "../models/category-models";
 import {v4 as uuidv4} from 'uuid'
@@ -53,6 +53,39 @@ export class PurchaseServices {
           .forEach(x => months[x] = 0)
         x.forEach(p => months[p.date.getMonth()] += p.priceInEGP)
         return months
+      })
+    )
+  }
+
+  getCategorizeStatistics(ids: string[], year: number) {
+    return this.purchasesSubject.pipe(
+      map((x: PurchaseModel[]) => x.filter(p =>
+        p.date.getFullYear() == year &&
+        ids.some(id => p.category.id === id))),
+      map(x => {
+        const categoriesMap: Map<string, { cat: CategoryModel, price: number }[]> = new Map()
+        x.forEach(p => {
+          let categoryMonths = categoriesMap.get(p.category.id)
+          if (categoryMonths) {
+            categoryMonths[p.date.getMonth()].price += p.priceInEGP
+            return
+          }
+
+          const months = Array.from(Array(12).keys())
+            .map(x => ({
+              cat: p.category,
+              price: 0
+            }));
+
+          months[p.date.getMonth()].price = p.priceInEGP
+
+          categoriesMap.set(p.category.id, months)
+        })
+
+        return [...categoriesMap].map(x => x[1].map(m => ({
+          category: m.cat,
+          price: m.price
+        }) as CategorizeMonthStatistics))
       })
     )
   }

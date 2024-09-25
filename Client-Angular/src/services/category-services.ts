@@ -10,7 +10,8 @@ export class CategoryServices {
   categoriesSubject = new BehaviorSubject([] as CategoryModel[])
 
   constructor(private dataStore: DataStoreServices) {
-    this.categoriesSubject.next(dataStore.categories)
+    dataStore.getCategories()
+      .then(x => this.categoriesSubject.next(x))
   }
 
   getAll() {

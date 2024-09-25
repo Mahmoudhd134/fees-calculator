@@ -10,7 +10,8 @@ export class PlaceServices {
   placesSubject = new BehaviorSubject([] as PlaceModel[])
 
   constructor(private dataStore: DataStoreServices) {
-    this.placesSubject.next(this.dataStore.places)
+    this.dataStore.getPlaces()
+      .then(x => this.placesSubject.next(x))
   }
 
   getAll() {

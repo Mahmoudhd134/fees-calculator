@@ -3,6 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {CategoryModel} from "../models/category-models";
 import {PurchaseModel} from "../models/purchase.models";
 import {PlaceModel} from "../models/place.models";
+import {Directory, Encoding, Filesystem} from "@capacitor/filesystem";
 
 @Injectable({providedIn: 'root'})
 export class DataStoreServices {
@@ -19,51 +20,60 @@ export class DataStoreServices {
   private placesLoaded = false
 
   constructor() {
-    this.categoriesSubject.subscribe(data => {
-      if (this.categoriesLoaded)
-        localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(data))
+    this.categoriesSubject.subscribe(async (data) => {
+      if (this.categoriesLoaded) {
+        // localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(data))
+        await this.saveToFile(this.CATEGORIES_KEY, data)
+      }
     })
 
-    this.purchasesSubject.subscribe(data => {
-      if (this.purchasesLoaded)
-        localStorage.setItem(this.PURCHASES_KEY, JSON.stringify(data))
+    this.purchasesSubject.subscribe(async (data) => {
+      if (this.purchasesLoaded) {
+        // localStorage.setItem(this.PURCHASES_KEY, JSON.stringify(data))
+        await this.saveToFile(this.PURCHASES_KEY, data)
+      }
     })
 
-    this.placesSubject.subscribe(data => {
-      if (this.placesLoaded)
-        localStorage.setItem(this.PLACES_KEY, JSON.stringify(data))
+    this.placesSubject.subscribe(async (data) => {
+      if (this.placesLoaded) {
+        // localStorage.setItem(this.PLACES_KEY, JSON.stringify(data))
+        await this.saveToFile(this.PLACES_KEY, data)
+      }
     })
   }
 
-  loadCategories() {
-    const categories = JSON.parse(localStorage.getItem(this.CATEGORIES_KEY) ?? '[]') as CategoryModel[]
+  async loadCategories() {
+    // const categories = JSON.parse(localStorage.getItem(this.CATEGORIES_KEY) ?? '[]') as CategoryModel[]
+    const categories = await this.loadFromFile(this.CATEGORIES_KEY) as CategoryModel[]
     this.categoriesSubject.next(categories)
   }
 
-  loadPurchases() {
-    const purchases = JSON.parse(localStorage.getItem(this.PURCHASES_KEY) ?? '[]') as PurchaseModel[]
+  async loadPurchases() {
+    // const purchases = JSON.parse(localStorage.getItem(this.PURCHASES_KEY) ?? '[]') as PurchaseModel[]
+    const purchases = await this.loadFromFile(this.PURCHASES_KEY) as PurchaseModel[]
     this.purchasesSubject.next(purchases.map(p => ({...p, date: new Date(p.date)})))
   }
 
-  loadPlaces() {
-    const places = JSON.parse(localStorage.getItem(this.PLACES_KEY) ?? '[]') as PlaceModel[]
+  async loadPlaces() {
+    // const places = JSON.parse(localStorage.getItem(this.PLACES_KEY) ?? '[]') as PlaceModel[]
+    const places = await this.loadFromFile(this.PLACES_KEY) as PlaceModel[]
     this.placesSubject.next(places)
   }
 
-  load() {
-    this.loadPurchases()
-    this.loadCategories()
-    this.loadPlaces()
+  async load() {
+    await this.loadPurchases()
+    await this.loadCategories()
+    await this.loadPlaces()
   }
 
   set categories(categories: CategoryModel[]) {
     this.categoriesSubject.next(categories)
   }
 
-  get categories() {
+  async getCategories() {
     if (!this.categoriesLoaded) {
       this.categoriesLoaded = true
-      this.loadCategories()
+      await this.loadCategories()
     }
     return this.categoriesSubject.value
   }
@@ -72,10 +82,10 @@ export class DataStoreServices {
     this.purchasesSubject.next(purchases)
   }
 
-  get purchases() {
+  async getPurchases() {
     if (!this.purchasesLoaded) {
       this.purchasesLoaded = true
-      this.loadPurchases()
+      await this.loadPurchases()
     }
     return this.purchasesSubject.value
   }
@@ -84,11 +94,34 @@ export class DataStoreServices {
     this.placesSubject.next(places)
   }
 
-  get places() {
+  async getPlaces() {
     if (!this.placesLoaded) {
       this.placesLoaded = true
-      this.loadPlaces()
+      await this.loadPlaces()
     }
     return this.placesSubject.value
+  }
+
+  private async saveToFile(fileName: string, data: any) {
+    await Filesystem.writeFile({
+      path: fileName,
+      data: JSON.stringify(data),
+      directory: Directory.Documents,
+      encoding: Encoding.UTF8
+    });
+  }
+
+  private async loadFromFile<T>(fileName: string): Promise<T> {
+    try {
+      const result = await Filesystem.readFile({
+        path: fileName,
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8
+      });
+      return JSON.parse(result.data as string) as T;
+    } catch (error) {
+      console.error(`Error loading ${fileName}`, error);
+      return [] as T;
+    }
   }
 }

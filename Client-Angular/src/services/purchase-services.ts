@@ -12,7 +12,8 @@ export class PurchaseServices {
   private purchasesSubject = new BehaviorSubject([] as PurchaseModel[])
 
   constructor(private dataStore: DataStoreServices) {
-    this.purchasesSubject.next(dataStore.purchases)
+    dataStore.getPurchases()
+      .then(x => this.purchasesSubject.next(x))
   }
 
   getAll() {

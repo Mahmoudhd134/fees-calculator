@@ -9,7 +9,6 @@ export class LanguageServices {
   currentLang: Lang = 'ar'
 
   constructor(private translate: TranslateService) {
-    console.log('here')
     this.initialize()
   }
 

@@ -3,15 +3,33 @@
 
   <ion-content>
     <div class="container ion-padding mx-auto">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, dicta ducimus est ipsum molestiae
-      molestias nesciunt non officia omnis optio praesentium quo quos similique tempore tenetur ullam veritatis!
-      Impedit, sunt!
+
+      <ion-accordion-group [multiple]="true">
+        <ion-accordion value="all">
+          <ion-item slot="header">
+            <ion-label>{{ 'Statistics.Overall'|translate }}</ion-label>
+          </ion-item>
+          <ion-list [inset]="true" slot="content">
+            <ion-item>
+              <ion-select
+                [label]="'Statistics.YearLabel'|translate"
+                labelPlacement="floating"
+                [value]="selectYear"
+                (ionChange)="setMonthsPurchasesForYear($event.detail.value)">
+                <ion-select-option *ngFor="let year of years" [value]='year'>{{ year }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <canvas baseChart
+                      [datasets]="lineChartData.datasets"
+                      [labels]="monthsName"
+                      [options]="lineChartOptions"
+              ></canvas>
+            </ion-item>
+          </ion-list>
+        </ion-accordion>
+      </ion-accordion-group>
     </div>
-<!--    <canvas baseChart-->
-<!--            [datasets]="lineChartData"-->
-<!--            [labels]="months"-->
-<!--            [options]="lineChartOptions"-->
-<!--    >-->
-<!--    </canvas>-->
   </ion-content>
 </div>

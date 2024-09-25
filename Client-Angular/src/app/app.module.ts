@@ -20,6 +20,7 @@ import localeAr from '@angular/common/locales/ar';
 import {LanguageServices} from "../services/language-services";
 import {AllPurchasesComponent} from "./all-purchases/all-purchases.component";
 import {StatisticsComponent} from "./statistics/statistics.component";
+import {NgChartsModule} from 'ng2-charts'
 
 registerLocaleData(localeAr, 'ar')
 
@@ -53,8 +54,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
-
+    }),
+    NgChartsModule
   ],
   providers: [
     provideRouter(routes),

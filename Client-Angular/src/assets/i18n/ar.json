@@ -41,7 +41,12 @@
     "DeleteMsg2": "بسعر"
   },
   "Statistics": {
-    "Title": "الإحصائيات"
+    "Title": "الإحصائيات",
+    "ChartLineName": "المدفوعات",
+    "MonthsAxis": "الشهور",
+    "MoneyAxis": "المبلغ",
+    "YearLabel": "العام",
+    "Overall": "عام"
   },
   "Settings": {
     "Title": "الإعدادات",

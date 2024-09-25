@@ -1,7 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PurchaseServices} from "../../services/purchase-services";
-import {PurchaseModel} from "../../models/purchase.models";
 import {Subscription} from "rxjs";
+import {ChartData} from "chart.js";
+import {DatePipe} from "@angular/common";
+import {LanguageServices} from "../../services/language-services";
+import {Theme} from "../../services/theme-services";
 
 @Component({
   selector: 'app-statistics',
@@ -11,49 +14,71 @@ import {Subscription} from "rxjs";
 export class StatisticsComponent implements OnInit, OnDestroy {
   private monthsSub = new Subscription()
 
-  // months: number[] = []
+  months: number[] = []
+  years: number[] = []
+  selectYear = 0
 
-  public monthlyPurchases: number[] = [100, 200, 300, 250, 150, 400, 500, 320, 290, 310, 400, 480];
+  monthsName: string[] = [];
 
-  // Labels for months
-  public months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  lineChartData: ChartData = {datasets: []};
 
-  // Chart data structure
-  public lineChartData = [{
-    data: this.monthlyPurchases,  // Bind your purchases data
-    label: 'Purchases',
-    borderColor: '#42A5F5',
-    fill: false
-  }];
-
-  // Chart options
-  public lineChartOptions = {
-    responsive: true,   // Makes chart responsive to screen size
+  lineChartOptions = {
+    responsive: true,
     scales: {
+      x: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: this.ls.gt('Statistics.MonthsAxis')
+        }
+      },
       y: {
-        beginAtZero: true   // Y-axis starts at 0
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: this.ls.gt('Statistics.MoneyAxis')
+        }
       }
     }
   };
 
-  // Chart type
   public lineChartType = 'line';
 
-
-
   constructor(
-    private purchaseServices: PurchaseServices
+    private purchaseServices: PurchaseServices,
+    private datePipe: DatePipe,
+    private ls: LanguageServices
   ) {
   }
 
   ngOnInit() {
-    this.monthsSub = this.purchaseServices.getStatistics(2024).subscribe(data => {
-      // this.months = data
+    this.years = this.purchaseServices.getAvailableYears()
+    if (this.years.length > 0) {
+      this.selectYear = this.years[0]
+      this.setMonthsPurchasesForYear(this.selectYear)
+    }
+
+    this.monthsName = Array.from(Array(12).keys())
+      .map(x => this.datePipe.transform(new Date(new Date().setMonth(x)), 'MMMM') ?? 'aaa')
+
+  }
+
+  setMonthsPurchasesForYear(year: number) {
+    this.monthsSub.unsubscribe()
+    this.monthsSub = this.purchaseServices.getStatistics(year).subscribe(d => {
+      this.months = d
+      this.lineChartData = {
+        datasets: [
+          {data: d, label: this.ls.gt('Statistics.ChartLineName')}
+        ]
+      }
     })
   }
+
 
   ngOnDestroy() {
     this.monthsSub.unsubscribe()
   }
 
+  protected readonly LightMode = Theme;
 }

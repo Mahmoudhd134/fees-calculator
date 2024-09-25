@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {DataStoreServices} from "./data-store-services.service";
-import {BehaviorSubject, filter, map} from "rxjs";
+import {BehaviorSubject, filter, map, reduce} from "rxjs";
 import {PurchaseCategory, PurchaseModel} from "../models/purchase.models";
 import {PlaceModel} from "../models/place.models";
 import {CategoryModel} from "../models/category-models";
@@ -34,6 +34,14 @@ export class PurchaseServices {
   delete(id: string) {
     this.dataStore.purchases = this.dataStore.purchases.filter(x => x.id != id)
     this.purchasesSubject.next(this.purchasesSubject.value.filter(x => x.id != id))
+  }
+
+  getAvailableYears() {
+    const set = this.purchasesSubject.value
+      .map(x => x.date.getFullYear())
+      .reduce((set, x) => set.add(x), new Set<number>())
+
+    return [...set].sort((a, b) => b - a)
   }
 
   getStatistics(year: number) {

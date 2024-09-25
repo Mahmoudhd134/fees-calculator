@@ -5,7 +5,6 @@ import {CategorizeMonthStatistics, PurchaseCategory, PurchaseModel} from "../mod
 import {PlaceModel} from "../models/place.models";
 import {CategoryModel} from "../models/category-models";
 import {v4 as uuidv4} from 'uuid'
-import {patchFetchToLoadInMemoryAssets} from "@angular-devkit/build-angular/src/utils/server-rendering/fetch-patch";
 
 @Injectable({providedIn: 'root'})
 export class PurchaseServices {
@@ -28,12 +27,12 @@ export class PurchaseServices {
       priceInEGP: price,
       date: new Date(Date.now())
     }
-    this.dataStore.purchases = [purchase, ...this.dataStore.purchases]
+    this.dataStore.purchases = [purchase, ...this.purchasesSubject.value]
     this.purchasesSubject.next([purchase, ...this.purchasesSubject.value])
   }
 
   delete(id: string) {
-    this.dataStore.purchases = this.dataStore.purchases.filter(x => x.id != id)
+    this.dataStore.purchases = this.purchasesSubject.value.filter(x => x.id != id)
     this.purchasesSubject.next(this.purchasesSubject.value.filter(x => x.id != id))
   }
 

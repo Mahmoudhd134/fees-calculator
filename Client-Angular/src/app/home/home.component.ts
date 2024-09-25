@@ -51,12 +51,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   savePurchase() {
-    console.log({category: this.selectedCategory, place: this.selectedPlace, price: this.selectedPrice})
     if (!this.selectedCategory)
       return
     if (!this.selectedPlace)
       return
-    if (this.selectedPrice === 0)
+    if (!this.selectedPrice || this.selectedPrice === 0)
       return
 
     this.purchaseServices.add(this.selectedPlace, this.selectedCategory, this.selectedPrice)

@@ -23,17 +23,17 @@ export class CategoryServices {
       id: uuidv4(),
       name
     }
-    this.dataStore.categories = [...this.dataStore.categories, category]
+    this.dataStore.categories = [...this.categoriesSubject.value, category]
     this.categoriesSubject.next([...this.categoriesSubject.value, category])
   }
 
   remove(id: string) {
-    this.dataStore.categories = this.dataStore.categories.filter(x => x.id != id)
+    this.dataStore.categories = this.categoriesSubject.value.filter(x => x.id != id)
     this.categoriesSubject.next(this.categoriesSubject.value.filter(x => x.id != id))
   }
 
   edit(category: CategoryModel) {
-    this.dataStore.categories = this.dataStore.categories.map(x => x.id == category.id ? category : x)
+    this.dataStore.categories = this.categoriesSubject.value.map(x => x.id == category.id ? category : x)
     this.categoriesSubject.next(this.categoriesSubject.value.map(x => x.id == category.id ? category : x))
   }
 }

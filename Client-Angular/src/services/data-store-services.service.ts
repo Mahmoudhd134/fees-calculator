@@ -44,8 +44,12 @@ export class DataStoreServices {
 
   async loadCategories() {
     // const categories = JSON.parse(localStorage.getItem(this.CATEGORIES_KEY) ?? '[]') as CategoryModel[]
-    const categories = await this.loadFromFile(this.CATEGORIES_KEY) as CategoryModel[]
-    this.categoriesSubject.next(categories)
+    try {
+      const categories = await this.loadFromFile(this.CATEGORIES_KEY) as CategoryModel[]
+      this.categoriesSubject.next(categories)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async loadPurchases() {
@@ -120,6 +124,7 @@ export class DataStoreServices {
       });
       return JSON.parse(result.data as string) as T;
     } catch (error) {
+      await this.saveToFile(fileName, '')
       console.error(`Error loading ${fileName}`, error);
       return [] as T;
     }

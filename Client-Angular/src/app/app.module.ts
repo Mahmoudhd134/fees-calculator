@@ -13,14 +13,14 @@ import {FormsModule} from "@angular/forms";
 import {PlacesComponent} from "./places/places.component";
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {CategoriesComponent} from "./categories/categories.component";
 import {CurrencyPipe, DatePipe, registerLocaleData} from '@angular/common';
 import localeAr from '@angular/common/locales/ar';
 import {LanguageServices} from "../services/language-services";
 import {AllPurchasesComponent} from "./all-purchases/all-purchases.component";
 import {StatisticsComponent} from "./statistics/statistics.component";
-import {NgChartsModule} from 'ng2-charts'
+import {provideCharts, withDefaultRegisterables, BaseChartDirective} from 'ng2-charts'
 import {CategoryStatisticsComponent} from "./statistics/category-statistics/category-statistics.component";
 import {OverallStatisticsComponent} from "./statistics/overall-statistics/overall-statistics.component";
 
@@ -42,7 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AllPurchasesComponent,
     StatisticsComponent,
     OverallStatisticsComponent,
-    CategoryStatisticsComponent
+    CategoryStatisticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +51,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonRouterLink,
     IonRouterLinkWithHref,
     FormsModule,
-    HttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -59,7 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    NgChartsModule
+    BaseChartDirective
   ],
   providers: [
     provideRouter(routes),
@@ -68,14 +67,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     {
       provide: LOCALE_ID,
       useFactory: (langServices: LanguageServices) => {
-        return langServices.currentLang
+        return langServices.currentLang;
       },
       deps: [LanguageServices]
     },
     DatePipe,
     CurrencyPipe,
+    provideHttpClient(withInterceptorsFromDi()),
+    provideCharts(withDefaultRegisterables()),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 

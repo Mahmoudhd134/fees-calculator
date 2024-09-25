@@ -19,6 +19,7 @@ import {CurrencyPipe, DatePipe, registerLocaleData} from '@angular/common';
 import localeAr from '@angular/common/locales/ar';
 import {LanguageServices} from "../services/language-services";
 import {AllPurchasesComponent} from "./all-purchases/all-purchases.component";
+import {StatisticsComponent} from "./statistics/statistics.component";
 
 registerLocaleData(localeAr, 'ar')
 
@@ -35,7 +36,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SettingsComponent,
     PlacesComponent,
     CategoriesComponent,
-    AllPurchasesComponent
+    AllPurchasesComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       deps: [LanguageServices]
     },
     DatePipe,
-    CurrencyPipe
+    CurrencyPipe,
   ],
   bootstrap: [AppComponent]
 })

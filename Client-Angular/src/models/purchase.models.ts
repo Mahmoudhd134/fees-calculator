@@ -14,3 +14,8 @@ export interface PurchaseCategory {
   purchases: PurchaseModel[]
   totalPrice: number
 }
+
+export interface PurchasesMonthStatistics {
+  month: Date
+  value: number
+}

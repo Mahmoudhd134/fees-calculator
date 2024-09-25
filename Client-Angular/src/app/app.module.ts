@@ -21,6 +21,8 @@ import {LanguageServices} from "../services/language-services";
 import {AllPurchasesComponent} from "./all-purchases/all-purchases.component";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {NgChartsModule} from 'ng2-charts'
+import {CategoryStatisticsComponent} from "./statistics/category-statistics/category-statistics.component";
+import {OverallStatisticsComponent} from "./statistics/overall-statistics/overall-statistics.component";
 
 registerLocaleData(localeAr, 'ar')
 
@@ -39,6 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CategoriesComponent,
     AllPurchasesComponent,
     StatisticsComponent,
+    OverallStatisticsComponent,
+    CategoryStatisticsComponent
   ],
   imports: [
     BrowserModule,

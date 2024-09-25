@@ -1,0 +1,20 @@
+<ion-list [inset]="true">
+  <ion-item>
+    <ion-select
+      [label]="'Statistics.YearLabel'|translate"
+      labelPlacement="floating"
+      [value]="selectYear"
+      (ionChange)="setMonthsPurchasesForYear($event.detail.value)">
+      <ion-select-option *ngFor="let year of years" [value]='year'>{{ year }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <canvas baseChart
+            [datasets]="lineChartData.datasets"
+            [labels]="monthsName"
+            [options]="lineChartOptions"
+    ></canvas>
+  </ion-item>
+</ion-list>
+

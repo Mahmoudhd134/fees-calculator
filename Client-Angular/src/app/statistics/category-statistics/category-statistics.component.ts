@@ -8,6 +8,7 @@ import {CategorizeMonthStatistics} from "../../../models/purchase.models";
 import {DatePipe} from "@angular/common";
 import {LanguageServices} from "../../../services/language-services";
 import {ChartData, ChartOptions} from "chart.js";
+import {getRandomColor} from "../../../utils/generate-random-colore";
 
 @Component({
   selector: 'app-category-statistics',
@@ -91,7 +92,12 @@ export class CategoryStatisticsComponent implements OnInit, OnDestroy {
     this.lineChartData = {
       datasets: this._categoriesStatistics.map(cat => ({
         data: cat.slice(this.selectQuarter * 3, this.selectQuarter * 3 + 3).map(xx => xx.price),
-        label: cat[0].category.name
+        label: cat[0].category.name,
+        backgroundColor: getRandomColor(),
+        borderColor: getRandomColor(),
+        pointBackgroundColor: getRandomColor(),
+        pointBorderColor: '#fff',
+        fill: true
       }))
     }
   }

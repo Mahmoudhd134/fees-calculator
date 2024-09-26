@@ -47,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     RouterModule,
-    IonicModule,
+    IonicModule.forRoot(),
     IonRouterLink,
     IonRouterLinkWithHref,
     FormsModule,

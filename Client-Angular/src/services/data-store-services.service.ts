@@ -4,12 +4,13 @@ import {CategoryModel} from "../models/category-models";
 import {PurchaseModel} from "../models/purchase.models";
 import {PlaceModel} from "../models/place.models";
 import {Directory, Encoding, Filesystem} from "@capacitor/filesystem";
+import {environment} from "../app/environment";
 
 @Injectable({providedIn: 'root'})
 export class DataStoreServices {
-  private CATEGORIES_KEY = 'categories'
-  private PURCHASES_KEY = 'purchases'
-  private PLACES_KEY = 'places'
+  private CATEGORIES_KEY = 'data/categories.json'
+  private PURCHASES_KEY = 'data/purchases.json'
+  private PLACES_KEY = 'data/places.json'
 
   private categoriesSubject = new BehaviorSubject([] as CategoryModel[])
   private purchasesSubject = new BehaviorSubject([] as PurchaseModel[])
@@ -108,7 +109,7 @@ export class DataStoreServices {
 
   private async saveToFile(fileName: string, data: any) {
     await Filesystem.writeFile({
-      path: fileName,
+      path: environment.BASE_DIR + '/' + fileName,
       data: JSON.stringify(data),
       directory: Directory.Documents,
       encoding: Encoding.UTF8
@@ -118,7 +119,7 @@ export class DataStoreServices {
   private async loadFromFile<T>(fileName: string): Promise<T> {
     try {
       const result = await Filesystem.readFile({
-        path: fileName,
+        path: environment.BASE_DIR + '/' + fileName,
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });

@@ -8,7 +8,7 @@ import {CategorizeMonthStatistics} from "../../../models/purchase.models";
 import {DatePipe} from "@angular/common";
 import {LanguageServices} from "../../../services/language-services";
 import {ChartData, ChartOptions} from "chart.js";
-import {getRandomColor} from "../../../utils/generate-random-colore";
+import {generateColors, getRandomColor} from "../../../utils/generate-random-colore";
 
 @Component({
   selector: 'app-category-statistics',
@@ -53,6 +53,8 @@ export class CategoryStatisticsComponent implements OnInit, OnDestroy {
     }
   };
 
+  lineColors: string[] = []
+
   constructor(private categoryService: CategoryServices,
               private purchaseService: PurchaseServices,
               private datePipe: DatePipe,
@@ -62,6 +64,7 @@ export class CategoryStatisticsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.catSub = this.categoryService.getAll().subscribe(data => {
       this.categories = data
+      this.lineColors = generateColors(data.length)
     })
 
     this.years = this.purchaseService.getAvailableYears()
@@ -90,12 +93,12 @@ export class CategoryStatisticsComponent implements OnInit, OnDestroy {
       this.selectQuarter = quarter
 
     this.lineChartData = {
-      datasets: this._categoriesStatistics.map(cat => ({
+      datasets: this._categoriesStatistics.map((cat,i) => ({
         data: cat.slice(this.selectQuarter * 3, this.selectQuarter * 3 + 3).map(xx => xx.price),
         label: cat[0].category.name,
-        backgroundColor: getRandomColor(),
-        borderColor: getRandomColor(),
-        pointBackgroundColor: getRandomColor(),
+        backgroundColor: this.lineColors[i],
+        borderColor: this.lineColors[i],
+        pointBackgroundColor: this.lineColors[i],
         pointBorderColor: '#fff',
         fill: true
       }))

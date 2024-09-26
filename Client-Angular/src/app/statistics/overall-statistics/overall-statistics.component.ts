@@ -4,7 +4,7 @@ import {DatePipe} from "@angular/common";
 import {LanguageServices} from "../../../services/language-services";
 import {Subscription} from "rxjs";
 import {ChartData} from "chart.js";
-import {getRandomColor} from "../../../utils/generate-random-colore";
+import {generateColors, getRandomColor} from "../../../utils/generate-random-colore";
 
 @Component({
   selector: 'app-overall-statistics',
@@ -22,6 +22,7 @@ export class OverallStatisticsComponent implements OnInit, OnDestroy {
   monthsName: string[] = [];
 
   lineChartData: ChartData = {datasets: []};
+  lineChartColors = generateColors(1)
 
   lineChartOptions = {
     responsive: true,
@@ -71,9 +72,9 @@ export class OverallStatisticsComponent implements OnInit, OnDestroy {
           {
             data: d,
             label: this.ls.gt('Statistics.ChartLineName'),
-            backgroundColor: getRandomColor(),
-            borderColor: getRandomColor(),
-            pointBackgroundColor: getRandomColor(),
+            backgroundColor: this.lineChartColors[0],
+            borderColor: this.lineChartColors[0],
+            pointBackgroundColor: this.lineChartColors[0],
             pointBorderColor: '#fff',
             fill: true
           }

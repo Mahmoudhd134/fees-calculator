@@ -1,7 +1,13 @@
-// Function to generate random color in RGB format
-export const getRandomColor = (): string => {
-  const r = Math.floor(Math.random() * 256);
-  const g = Math.floor(Math.random() * 256);
-  const b = Math.floor(Math.random() * 256);
-  return `rgb(${r}, ${g}, ${b})`;
+export const generateColors = (count: number) => {
+  return Array.from({length: count}, () => getRandomColor());
 }
+
+export const getRandomColor = () => {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+

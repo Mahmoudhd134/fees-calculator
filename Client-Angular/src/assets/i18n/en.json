@@ -3,29 +3,82 @@
     "Title": "Menu",
     "Home": "Home",
     "Settings": "Settings",
-    "Places": "Places"
+    "Places": "Places",
+    "Categories": "Categories",
+    "Statistics": "Statistics"
   },
   "Home": {
-    "Title": "Home",
-    "Welcome": "Welcome"
+    "Title": "Expense Calculator",
+    "SelectPlaceLabel": "Select a Place",
+    "SelectCategoryLabel": "Select a Category",
+    "SelectPriceLabel": "Purchase Price",
+    "AddPurchaseButton": "Add Purchase",
+    "LastPurchasesLabel": "Last Purchases of the Day",
+    "Day": "Day",
+    "Category": "Category",
+    "Place": "Place",
+    "Price": "Price",
+    "AllPurchases": "All Purchases"
+  },
+  "Places": {
+    "Title": "Places",
+    "Add": "Add New Place",
+    "Edit": "Edit Place",
+    "Delete": "Delete Place",
+    "DeleteMsg": "Are you sure you want to delete this place"
+  },
+  "Categories": {
+    "Title": "Categories",
+    "Add": "Add New Category",
+    "Edit": "Edit Category",
+    "Delete": "Delete Category",
+    "DeleteMsg": "Are you sure you want to delete this category"
+  },
+  "AllPurchases": {
+    "Title": "Expenses",
+    "Delete": "Delete Purchase",
+    "DeleteMsg": "Are you sure you want to delete this purchase",
+    "DeleteMsg2": "at a price of"
+  },
+  "Statistics": {
+    "Title": "Statistics",
+    "ChartLineName": "Payments",
+    "MonthsAxis": "Months",
+    "MoneyAxis": "Amount",
+    "YearLabel": "Year",
+    "Overall": "Overall",
+    "Categorize": "Categories"
+  },
+  "CategoryStatistics": {
+    "ChoseCategoriesLabel": "Choose categories to compare",
+    "SelectAllCategoriesButton": "Select All Categories",
+    "DeSelectAllCategoriesButton": "Deselect All Categories",
+    "MonthsAxis": "Months",
+    "MoneyAxis": "Amount"
   },
   "Settings": {
     "Title": "Settings",
     "AppearanceOption": "Appearance",
-    "Theme": "Theme",
+    "Theme": "Theme Mode",
     "ThemeModes": {
       "Dark": "Dark",
       "Light": "Light",
       "System": "System"
+    },
+    "Lang": {
+      "Label": "Language",
+      "Arabic": "Arabic",
+      "English": "English"
     }
   },
   "Options": {
-    "Ok": "Ok",
+    "Ok": "OK",
     "Cancel": "Cancel",
-    "ReturnBack": "Return Back",
+    "ReturnBack": "Go Back",
     "Edit": "Edit",
     "Save": "Save",
     "Add": "Add",
-    "Delete": "Delete"
+    "Delete": "Delete",
+    "Name": "Name"
   }
 }
